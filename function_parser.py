@@ -50,13 +50,13 @@ if __name__ == "__main__":
     folderpath = filedialog.askdirectory()
     index(folderpath)
     headers = ["sl no", "filename", "function name", "linenumber", "nested"]
-    filewritename = (
-        f'{folderpath.split("/")[-1]} {datetime.date.today()} function lister.txt'
-    )
+    filewritename =  os.getcwd()+f'\\history\\{folderpath.split("/")[-1]} {datetime.date.today()} function lister.txt'
+    os.makedirs(os.getcwd() + "\\history") if not Path(os.getcwd() + "\\history").is_dir() else print("Directory found")
     fileresult = open(filewritename, "w", encoding="UTF-16")
     fileresult.writelines(
         tabulate.tabulate(
             headers=headers, tabular_data=result, tablefmt="fancy_grid", showindex=True
         )
     )
+    fileresult.close()
     webbrowser.open(filewritename)

@@ -85,13 +85,15 @@ if __name__ == "__main__":
         "variable value",
         "linenumber",
     ]
-    filewritename = (
-        f'{folderpath.split("/")[-1]} {datetime.date.today()} variable lister.txt'
+    filewritename = (os.getcwd()+
+        f'\\history\\{folderpath.split("/")[-1]} {datetime.date.today()} variable lister.txt'
     )
+    os.makedirs(os.getcwd() + "\\history") if not Path(os.getcwd() + "\\history").is_dir() else print("Directory found")
     fileresult = open(filewritename, "w", encoding="UTF-16")
     fileresult.writelines(
         tabulate.tabulate(
             headers=headers, tabular_data=result, tablefmt="fancy_grid", showindex=True
         )
     )
+    fileresult.close()
     webbrowser.open(filewritename)

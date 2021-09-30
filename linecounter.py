@@ -24,7 +24,7 @@ def function_paraser(name, filepath):
         elif len(line) == 0:
             blanklinecount += 1
             totalblanklinecount += 1
-        elif line.startswith("#") == True:
+        elif line.startswith("#"):
             commentcounter += 1
             totalcommentcounter += 1
     functions.append([name, len(data), count, blanklinecount, commentcounter])
@@ -73,9 +73,14 @@ if __name__ == "__main__":
         "Blank lines",
         "Comments",
     ]
-    filewritename = (
-        f'{folderpath.split("/")[-1]} {datetime.date.today()} linecounter.txt'
+    filewritename = (os.getcwd()+
+        f'\\history\\{folderpath.split("/")[-1]} {datetime.date.today()} linecounter.txt'
     )
+
+    os.makedirs(os.getcwd()+"\\history") if not Path(os.getcwd()+"\\history").is_dir() else print("Directory found")
+
+
+
     fileresult = open(filewritename, "w", encoding="UTF-16")
 
     fileresult.writelines(
@@ -91,4 +96,5 @@ if __name__ == "__main__":
             f"\nTotal comments = {totalcommentcounter}",
         ]
     )
+    fileresult.close()
     webbrowser.open(filewritename)
